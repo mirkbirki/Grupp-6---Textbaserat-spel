@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class TextAdventure {
 
+    System.out.println("Andra push");
 
     //setup
     private static final Scanner input = new Scanner(System.in);
