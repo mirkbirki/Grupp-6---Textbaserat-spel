@@ -9,12 +9,15 @@ public class Main {
     public static String object = "";
     public static String currentArea = "Lobby";
     public static Boolean gameOver = false;
+    static boolean pouchFound = false;
+    static boolean chestFound = false;
+    static boolean boxFound = false;
 
     //game functions
     public static final String[] commands = {"goto", "search", "interact", "pickup", "help"};
     public static final String[] areas = {"forest", "cemetery", "sewers"};
-    public static final String[] objects = {"switch", "chest"};
-    public static final String[] items = {"sword", "shield"};
+    public static final String[] objects = {"pouch", "chest", "box"};
+    public static final String[] items = {"coins", "gold", "diamonds"};
 
     public static void gotoCommand(String input) {
 
@@ -25,10 +28,6 @@ public class Main {
             System.out.println("Area does not exist, try again!");
         }
 
-        //todo
-    }
-
-    public static void searchCommand(String input) {
         //todo
     }
 
@@ -71,17 +70,28 @@ public class Main {
                 gotoCommand(object);
             }
 
+            if (command.equals(commands[1]))
+                Search.searchCommand(currentArea);
+
             if (command.equals(commands[4])) {
                 Help.help();
             }
 
-
             //System.out.println("End of main line, loop next");
-
 
         } // spelet slut
         System.out.println("Game over");
     }
 
 }
- 
+
+
+
+
+
+
+
+
+
+
+
