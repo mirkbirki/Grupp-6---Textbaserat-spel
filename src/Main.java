@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -12,6 +13,7 @@ public class Main {
     static boolean pouchFound = false;
     static boolean chestFound = false;
     static boolean boxFound = false;
+    static ArrayList<String> inventory = new ArrayList<>();
 
     //game functions
     public static final String[] commands = {"goto", "search", "interact", "pickup", "help"};
@@ -72,6 +74,12 @@ public class Main {
 
             if (command.equals(commands[1]))
                 Search.searchCommand(currentArea);
+
+            if (command.equals(commands[2]))
+                Interact.interactCommand(currentArea);
+
+            if (command.equals(commands[3]))
+                Pickup.pickUpCommand(currentArea);
 
             if (command.equals(commands[4])) {
                 Help.help();
