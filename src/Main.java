@@ -13,82 +13,80 @@ public class Main {
     static boolean pouchFound = false;
     static boolean chestFound = false;
     static boolean boxFound = false;
+    static boolean pouchInteracted = false;
+    static boolean chestInteracted = false;
+    static boolean boxInteracted = false;
     static ArrayList<String> inventory = new ArrayList<>();
 
     //game functions
-    public static final String[] commands = {"goto", "search", "interact", "pickup", "help"};
+    public static final String[] commands = {"goto", "search", "interact", "pickup", "inventory", "help"};
     public static final String[] areas = {"forest", "cemetery", "sewers"};
     public static final String[] objects = {"pouch", "chest", "box"};
     public static final String[] items = {"coins", "gold", "diamonds"};
 
-    public static void gotoCommand(String input) {
-
-        if (Arrays.asList(areas).contains(input)) {
-            System.out.println("You have entered: " + input);
-            currentArea = input;
-        } else {
-            System.out.println("Area does not exist, try again!");
-        }
-
-        //todo
-    }
-
-    public static void interactCommand(String input) {
-        //todo
-    }
-
-    public static void pickupCommand(String input) {
-        //todo
-    }
-
-
     public static void main(String[] args) {
 
-        System.out.println("Welcome to: Spelnamn \n Make your choice: ");
+        System.out.println("Welcome to: Text Adventure!" + "\nMake your choice: ");
         Help.help();
+
         while (!gameOver) {
 
             System.out.println("Enter command:");
 
-            String[] prompt = input.nextLine().trim().split(" ");
+            String[] parts = input.nextLine().trim().split("\\s+");
+            if (parts.length == 0 || parts[0].isBlank()) continue;
 
-            if (prompt[0].isBlank()) continue;
+            String cmd = parts[0].toLowerCase();
 
-            if (Arrays.asList(commands).contains(prompt[0])) {
-                command = prompt[0].toLowerCase();
-            } else {
+            if (Arrays.asList(commands).contains(cmd)) {
+                command = cmd;
+            }
+
+            else {
                 System.out.println("Command does not exist, try again");
                 continue;
             }
 
-            if (prompt.length >= 2) {
-                object = prompt[1].toLowerCase();
-            } else if (!prompt[0].contains(commands[4])) {
+            if (parts.length >= 2) {
+                object = parts[1].toLowerCase();
+            } else if (!command.equals("help") && !command.equals("inventory")) {
                 System.out.println("Object does not exist, try again!");
                 continue;
             }
 
-            if (command.equals(commands[0])) { // goto -> areas
-                gotoCommand(object);
+            switch (command) {
+                case "goto":
+                    GoTo.gotoCommand(object);
+                    break;
+                case "search":
+                    Search.searchCommand(currentArea);
+                    break;
+                case "interact":
+                    Interact.interactCommand(object);
+                    break;
+                case "pickup":
+                    Pickup.pickUpCommand(object);
+                    break;
+                case "inventory":
+                    Inventory.inventoryCommand();
+                    break;
+                case "help":
+                    Help.help();
+                    break;
             }
 
-            if (command.equals(commands[1]))
-                Search.searchCommand(currentArea);
+            if (Main.inventory.contains("coins") &&
+                    Main.inventory.contains("gold") &&
+                    Main.inventory.contains("diamonds")) {
 
-            if (command.equals(commands[2]))
-                Interact.interactCommand(currentArea);
-
-            if (command.equals(commands[3]))
-                Pickup.pickUpCommand(currentArea);
-
-            if (command.equals(commands[4])) {
-                Help.help();
+                System.out.println("\nCongratulations! You found all the treasures!");
+                gameOver = true;
             }
 
-            //System.out.println("End of main line, loop next");
+        }
 
-        } // spelet slut
-        System.out.println("Game over");
+        System.out.println("Game over.");
+
     }
 
 }
