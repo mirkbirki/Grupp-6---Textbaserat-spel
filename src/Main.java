@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -18,18 +19,14 @@ public class Main {
     public static final String[] areas = {"forest", "cemetery", "sewers"};
     public static final String[] objects = {"pouch", "chest", "box"};
     public static final String[] items = {"coins", "gold", "diamonds"};
+    public static String destination = "";
+    public static boolean hasEncounteredGoblin = false;
 
-    public static void gotoCommand(String input) {
-
-        if (Arrays.asList(areas).contains(input)) {
-            System.out.println("You have entered: " + input);
-            currentArea = input;
-        } else {
-            System.out.println("Area does not exist, try again!");
-        }
-
-        //todo
-    }
+    //Player
+    public static ArrayList<String> inventory = new ArrayList<>();
+    public static int health = 100;
+    public static int damage = 5;
+    public static int coins = 0;
 
     public static void interactCommand(String input) {
         //todo
@@ -46,7 +43,7 @@ public class Main {
         Help.help();
         while (!gameOver) {
 
-            System.out.println("Enter command:");
+            System.out.print("Enter command: ");
 
             String[] prompt = input.nextLine().trim().split(" ");
 
@@ -67,7 +64,7 @@ public class Main {
             }
 
             if (command.equals(commands[0])) { // goto -> areas
-                gotoCommand(object);
+                GoToCommand.goToCommand(object);
             }
 
             if (command.equals(commands[1]))
