@@ -19,12 +19,43 @@ public class GoToCommand {
                     System.out.println("You re-enter the forest. The goblin is gone, and the path ahead is clear.");
                 }
             }
+
+            boolean usedKey = false;
+            if (Main.destination.equals("cemetery")) {
+                if (Main.inventory.contains("cemetery key")) {
+                    System.out.println("You use the rusty key to unlock the iron gates. You enter the desolate cemetery.");
+                    Main.currentArea = input;
+                    usedKey = true;
+                }
+
+                if (!usedKey) {
+                    System.out.println("The iron gate is locked shut. You need a key to get in.");
+                } else {
+                    System.out.println("You enter the cemetery with open gates.");
+                }
+            }
+
+            boolean foundRustyCoin = false;
+            if (Main.destination.equals("sewers")) {
+                Main.currentArea = "sewers";
+
+                if (Main.inventory.contains("Rusty Coin")) {
+                    System.out.println("You walk into the sewers and see a shiny object!");
+                    System.out.println("It's a rusty coin. Rumor says it's worth 1000 coins!");
+                    Main.inventory.add("Rusty Coin");
+                    foundRustyCoin = true;
+                }
+
+                if (!foundRustyCoin) {
+                    System.out.println("You are in the " + Main.currentArea);
+                }
+
+            }
         } else {
             System.out.println("Area does not exist, try again!");
         }
     }
 
-    // To be continued...
     public static void startBattle(String enemyName) {
         System.out.println("You are now locked in battle against the " + enemyName + ". It has 10 health");
         System.out.println("You have 3 options flee, attack or defend.");
@@ -58,12 +89,22 @@ public class GoToCommand {
                     break;
                 case "defend":
                     System.out.println("You defend the goblins attack and took less damage.");
-                    Main.health -= 5;
-                    System.out.println("Your health: " + Main.health);
-                    if (Main.health <= 0) {
-                        Main.gameOver = true;
-                        return;
+                    int randomNum = (int)(Math.random() * 101); // Generates number between 0-100
+
+                    // Basically 50% chance to block incoming attack
+                    if (randomNum < 50) {
+                        System.out.println("You took damage attempting to block.");
+                        Main.health -= 10;
+                        System.out.println("Your health: " + Main.health);
+                        if (Main.health <= 0) {
+                            Main.gameOver = true;
+                            return;
+                        }
+                    } else {
+                        System.out.println("You successfully blocked the attack. No damage was taken.");
+                        System.out.println("Your health: " + Main.health);
                     }
+
                     break;
                 case "flee":
                     System.out.println("You chose to flee.");
