@@ -69,7 +69,12 @@ public class Main {
 
             if (command.equals(commands[1]))
                 Search.searchCommand(currentArea);
-
+            }
+            
+            if (command.equals(commands[2]))
+                InteractCommand.interactCommand(object, currentArea);
+            }
+    
             if (command.equals(commands[4])) {
                 Help.help();
             }
