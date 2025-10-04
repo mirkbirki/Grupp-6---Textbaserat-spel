@@ -15,7 +15,7 @@ public class Main {
     static boolean boxFound = false;
 
     //game functions
-    public static final String[] commands = {"goto", "search", "interact", "pickup", "help"};
+    public static final String[] commands = {"goto", "search", "interact", "help"};
     public static final String[] areas = {"forest", "cemetery", "sewers"};
     public static final String[] objects = {"pouch", "chest", "box"};
     public static final String[] items = {"coins", "gold", "diamonds"};
@@ -31,11 +31,6 @@ public class Main {
     public static void interactCommand(String input) {
         //todo
     }
-
-    public static void pickupCommand(String input) {
-        //todo
-    }
-
 
     public static void main(String[] args) {
 
@@ -63,22 +58,23 @@ public class Main {
                 continue;
             }
 
-            if (command.equals(commands[0])) { // goto -> areas
-                GoToCommand.goToCommand(object);
+            switch (command) {
+                case "goto":
+                    GoToCommand.goToCommand(object);
+                    break;
+                case "search":
+                    Search.searchCommand(currentArea);
+                    break;
+                case "interact":
+                    InteractCommand.interactCommand(object, currentArea);
+                    break;
+                case "help":
+                    Help.help();
+                    break;
+                default:
+                    System.out.println("Command does not exist, try again");
+                    break;
             }
-
-            if (command.equals(commands[1]))
-                Search.searchCommand(currentArea);
-            }
-            
-            if (command.equals(commands[2]))
-                InteractCommand.interactCommand(object, currentArea);
-            }
-    
-            if (command.equals(commands[4])) {
-                Help.help();
-            }
-
             //System.out.println("End of main line, loop next");
 
         } // spelet slut
