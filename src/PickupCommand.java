@@ -1,8 +1,6 @@
 public class PickupCommand {
 
     public static void pickup(String object) {
-
-
         switch (object.toLowerCase()) {
             case "pouch":
                 if (!Main.pouchFound) {
@@ -52,7 +50,14 @@ public class PickupCommand {
     }
 
 
-// Ett sätt att lösa det hela
+/*
+Ett sätt att lösa det hela från main med pickupcommand
+Jag anser dock att ansvaret för pickup ska hanteras i "interact" då användaren borde få välja där och då.
+Därav två alternativ. ta bort kommentarerna och kommentera om vissa områden i pickupcommand & interactcommand
+samt lägg till ett nytt case i Main för pickupcommand.
+
+*/
+
 //    public static void PickupCommand(String input) {
 //        switch (input.toLowerCase()) {
 //            case "pouch":
