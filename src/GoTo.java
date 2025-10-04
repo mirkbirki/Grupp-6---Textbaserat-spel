@@ -7,6 +7,7 @@ public class GoTo {
         if (Arrays.asList(Main.areas).contains(input.toLowerCase())) {
             System.out.println("You journey to the " + input);
             Main.destination = input;
+            Main.currentArea = input;
 
             if (Main.destination.equals("forest")) {
                 System.out.println("Your destination is to the forest");
@@ -20,19 +21,14 @@ public class GoTo {
                 }
             }
 
-            boolean foundRustyCoin = false;
             if (Main.destination.equals("sewers")) {
                 Main.currentArea = "sewers";
 
-                if (Main.inventory.contains("Rusty Coin")) {
+                if (!Main.inventory.contains("Rusty Coin")) {
                     System.out.println("You walk into the sewers and see a shiny object!");
                     System.out.println("It's a rusty coin. Rumor says it's worth 1000 coins!");
                     Main.inventory.add("Rusty Coin");
-                    foundRustyCoin = true;
-                }
 
-                if (!foundRustyCoin) {
-                    System.out.println("You are in the " + Main.currentArea);
                 }
 
             }

@@ -23,6 +23,14 @@ public class Main {
     public static final String[] areas = {"forest", "cemetery", "sewers"};
     public static final String[] objects = {"pouch", "chest", "box"};
     public static final String[] items = {"coins", "gold", "diamonds"};
+    public static String destination = "";
+    public static boolean hasEncounteredGoblin = false;
+
+    //Player
+    public static int health = 100;
+    public static int damage = 5;
+    public static int coins = 0;
+
 
     public static void main(String[] args) {
 
@@ -56,7 +64,7 @@ public class Main {
 
             switch (command) {
                 case "goto":
-                    GoTo.gotoCommand(object);
+                    GoTo.Command(object);
                     break;
                 case "search":
                     Search.searchCommand(currentArea);
