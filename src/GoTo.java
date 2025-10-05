@@ -21,6 +21,13 @@ public class GoTo {
                 }
             }
 
+            if (Main.destination.equals("cemetery")) {
+                if (Main.inventory.contains("cemetery key")) {
+                    Main.currentArea = input;
+                    System.out.println("You are now in the " + Main.currentArea);
+                }
+            }
+
             if (Main.destination.equals("sewers")) {
                 Main.currentArea = "sewers";
 
